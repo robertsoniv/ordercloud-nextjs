@@ -106,6 +106,18 @@ export default function Layout({ children, home }) {
       </nav>
       </header>
       <main className="full-height bg-gray-50">{children}</main>
+      <footer className="bg-white border-t border-gray-300 flex space-x-4 items-center justify-center" style={{minHeight: 64}}>
+          <p>
+            {`Made by `}
+            <a className="text-green-600" href="https://github.com/robertsoniv" target="_blank">@robertsoniv</a>
+            {` using `}
+            <a className="text-green-600" href="https://ordercloud.io" target="_blank">Four51 OrderCloud™</a>
+            {`, `}
+            <a className="text-green-600" href="https://nextjs.org" target="_blank">Next.js</a>
+            {`, and `}
+            <a className="text-green-600" href="https://tailwindcss.com" target="_blank">tailwindcss</a>
+          </p>
+      </footer>
     </div>
   )
 }
