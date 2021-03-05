@@ -8,15 +8,21 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.2.1",
+    "autoprefixer": "^10.2.4",
     "axios": "^0.21.1",
     "date-fns": "^2.18.0",
     "gray-matter": "^4.0.2",
     "jwt-decode": "^3.1.2",
     "next": "^10.0.0",
     "ordercloud-javascript-sdk": "^4.2.0",
+    "postcss": "^8.2.7",
+    "prismjs": "^1.23.0",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.1",
+    "tailwindcss": "^2.0.3"
   }
 }

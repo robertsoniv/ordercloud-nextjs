@@ -24,6 +24,10 @@
     font-size: 1.2rem;
     line-height: 1.5;
 }
+
+.navLink {
+    margin-right: 15px;
+}
   
 .borderCircle {
     border-radius: 9999px;
@@ -39,12 +43,18 @@
 
 .list {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 6px 12px;
+    margin: 1.25rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.list:not(:last-child) {
+    border-bottom: 1px solid #ddd;
 }
   
 .listItem {
-    margin: 0 0 1.25rem;
+    /* margin: 0 0 1.25rem; */
 }
   
 .lightText {
@@ -62,10 +72,20 @@
 }
 
 .button {
+    cursor: pointer;
     border:none;
     background: rgb(116, 31, 31);
     color: white;
-    font-size: 18px;
-    padding: 6px 12px;
+    font-size: 16px;
+    padding: 8px 12px;
     border-radius: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+      Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.fullWidth {
+    width: 100%
+
 }

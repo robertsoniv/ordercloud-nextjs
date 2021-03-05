@@ -1,31 +1,27 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
-import Link from 'next/link'
-import Date from '../components/date'
+import { siteTitle } from '../components/layout'
 import { useOrderCloud } from '../lib/ordercloud-provider'
-import LoginForm from '../components/login-form'
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
-  return {
-    props: {
-      allPostsData
-    }
-  }
-}
+import Prism from 'prismjs'
+import 'prismjs/components/prism-json'
 
 export default function Home({ allPostsData }) {
   const oc = useOrderCloud();
   return (
-    <Layout home>
+    <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <label htmlFor="authStatus">Authentication Status</label>
-      <pre id="authStatus">{JSON.stringify(oc, null, 2)}</pre>
-      <LoginForm/>
-    </Layout>
+      <label htmlFor="orderCloudContext" className="block font-extrabold text-xl pt-6">Current Context</label>
+        <pre id="orderCloudContext" className='language-json shadow-lg rounded-xl overflow-hidden text-xs max-w-md'>
+          <code
+              className='language-json'
+              dangerouslySetInnerHTML={{ __html: Prism.highlight(
+                JSON.stringify(oc, null, 2),
+                Prism.languages.json,
+                'json'
+              ) }}
+          />
+        </pre>
+    </div>
   )
 }
