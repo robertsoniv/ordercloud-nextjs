@@ -50,3 +50,22 @@
 .lightText {
     color: #666;
 }
+
+.input {
+    font-size: 18px;
+    padding: 6px 4px;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid #7e7e7e;
+    border-radius: 5px;
+}
+
+.button {
+    border:none;
+    background: rgb(116, 31, 31);
+    color: white;
+    font-size: 18px;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
