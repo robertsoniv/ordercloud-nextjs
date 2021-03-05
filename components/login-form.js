@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useOrderCloud } from "../lib/ordercloud-provider"
@@ -24,7 +25,7 @@ export default function LoginForm() {
     }, [isAnonymous])
 
     return isAnonymous && (
-        <div className="flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8" style={{minHeight: 'calc(100vh - 64px)'}}>
+        <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
                     Sign in to your account
@@ -54,9 +55,11 @@ export default function LoginForm() {
                         </div>
 
                         <div className="text-sm">
-                        <a href="#" className="font-medium text-red-600 hover:text-red-500">
-                            Forgot your password?
-                        </a>
+                        <Link href="/forgot-password">
+                            <a className="font-medium text-red-600 hover:text-red-500">
+                                Forgot your password?
+                            </a>
+                        </Link>
                         </div>
                     </div>
 
