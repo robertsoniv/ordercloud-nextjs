@@ -70,10 +70,10 @@ export default function Layout({ children, home }) {
                     <NavLink href="/login">Login</NavLink>
                     ) : (
                       <>
-                    <button onClick={logout} className="text-red-500 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+                    <button onClick={logout} className="hidden sm:block text-red-500 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
                     {user && (
                       <>
-                        <p className="text-red-500 px-3 py-2 rounded-md text-sm font-medium">{`Welcome, ${user.FirstName} ${user.LastName}!`}</p>
+                        <p className="hidden sm:block text-red-500 px-3 py-2 rounded-md text-sm font-medium">{`Welcome, ${user.FirstName} ${user.LastName}!`}</p>
                         <div className="ml-3 relative">
                           <div>
                               <div className="bg-red-500 text-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -96,11 +96,10 @@ export default function Layout({ children, home }) {
         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
         <div className="sm:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-            <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-            <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+              <NavLink href="/" fullWidth>Home</NavLink>
+              <NavLink href="/products" fullWidth>Products</NavLink>
+              <button onClick={logout} className="sm:hidden w-full border-solid border border-red-500 text-red-500 hover:border-red-900 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+
           </div>
         </div>
       </nav>
