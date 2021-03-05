@@ -98,7 +98,9 @@ export default function Layout({ children, home }) {
           <div className="px-2 pt-2 pb-3 space-y-1">
               <NavLink href="/" fullWidth>Home</NavLink>
               <NavLink href="/products" fullWidth>Products</NavLink>
-              <button onClick={logout} className="sm:hidden w-full border-solid border border-red-500 text-red-500 hover:border-red-900 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+              {!isAnonymous && (
+                <button onClick={logout} className="sm:hidden w-full border-solid border border-red-500 text-red-500 hover:border-red-900 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+              )}
 
           </div>
         </div>
