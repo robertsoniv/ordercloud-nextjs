@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import { siteTitle } from '../components/layout'
-import { useOrderCloud } from '../lib/ordercloud-provider'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-json'
+import { siteTitle } from '../components/layout'
+import useOrderCloud from '../lib/use-ordercloud'
 
 export default function Home({ allPostsData }) {
   const oc = useOrderCloud();

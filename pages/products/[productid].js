@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { Me } from "ordercloud-javascript-sdk";
 import { useCallback, useEffect, useState } from "react";
-import Layout from "../../components/layout";
-import { useOrderCloud } from "../../lib/ordercloud-provider";
+import useOrderCloud from "../../lib/use-ordercloud";
 
 export function formatPrice(amount) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'}).format(amount)
@@ -10,7 +9,7 @@ export function formatPrice(amount) {
 
 export default function ProductDetail() {
     const { query } = useRouter()
-    const { isAuthenticated } = useOrderCloud()
+    const { isAuthenticated, isAnonymous } = useOrderCloud()
 
     const [data, setData] = useState()
 
@@ -27,10 +26,11 @@ export default function ProductDetail() {
     }, [query.productid])
 
     useEffect(() => {
+        console.log('p is auth', isAnonymous)
         if (isAuthenticated) {
             retrieveProduct()
         }
-    }, [isAuthenticated, retrieveProduct])
+    }, [isAnonymous, isAuthenticated, retrieveProduct])
 
     return (<div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">{data ? (
                 <>
@@ -38,7 +38,7 @@ export default function ProductDetail() {
                         <h1 className="text-6xl font-extrabold mb-4">{data.Name}</h1>
                         <p className="text-3xl font-black text-green-500">{formatPrice(data.PriceSchedule.PriceBreaks[0].Price)}</p>
                     </div>
-                    <p className="text-xl">{data.Description}</p>
+                    <p className="text-xl" dangerouslySetInnerHTML={{ __html: data.Description}}/>
                 </>
                 ) : (
                 <h1>Product Data Loading...</h1>

@@ -1,12 +1,26 @@
 import Head from 'next/head'
-import { useOrderCloud } from '../lib/ordercloud-provider'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { isJSDocAugmentsTag } from 'typescript'
+import useOrderCloud from '../lib/use-ordercloud'
+import { getUser, logout } from '../redux/slices/ordercloud'
 import NavLink from './nav-link'
 
 export const siteTitle = 'Next.js OrderCloud Authentication '
 
 export default function Layout({ children, home }) {
-  const {isAnonymous, logout, user} = useOrderCloud()
+  const {isAnonymous, isAuthenticated, user} = useOrderCloud();
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    console.log('user')
+    if (isAnonymous && !isAuthenticated) {
+      dispatch(logout())
+    } else if (!isAnonymous && !user) {
+      dispatch(getUser())
+    }
+  }, [isAnonymous, user])
+  
   return (
     <div>
       <Head>
@@ -70,7 +84,7 @@ export default function Layout({ children, home }) {
                     <NavLink href="/login">Login</NavLink>
                     ) : (
                       <>
-                    <button onClick={logout} className="hidden sm:block text-red-500 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+                    <button onClick={() => dispatch(logout())} className="hidden sm:block text-red-500 hover:bg-red-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
                     {user && (
                       <>
                         <p className="hidden sm:block text-red-500 px-3 py-2 rounded-md text-sm font-medium">{`Welcome, ${user.FirstName} ${user.LastName}!`}</p>

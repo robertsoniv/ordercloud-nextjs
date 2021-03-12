@@ -1,21 +1,24 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useOrderCloud } from "../lib/ordercloud-provider"
+import { useDispatch } from "react-redux";
+import useOrderCloud from "../lib/use-ordercloud";
+import { login } from "../redux/slices/ordercloud";
 
 export default function LoginForm() {
-    const {login, isAnonymous} = useOrderCloud()
-    const router = useRouter()
+    const dispatch = useDispatch()
+    const {isAnonymous} = useOrderCloud()
+    const router = useRouter();
     const [message, setMessage] = useState()
 
     const loginUser = async event => {
+        console.log('hit')
         event.preventDefault()
-        setMessage()
-        try {
-            await login(event.target.username.value, event.target.password.value, event.target.remember_me.checked);
-        } catch (ex) {
-            setMessage(ex.response.data.error_description);
-        }
+        dispatch(login({
+            username: event.target.username.value, 
+            password: event.target.password.value, 
+            remember: event.target.remember_me.checked
+        }))
     }
 
     useEffect(() => {
@@ -24,7 +27,7 @@ export default function LoginForm() {
         }
     }, [isAnonymous])
 
-    return isAnonymous && (
+    return (
         <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
