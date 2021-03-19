@@ -1,25 +1,14 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { isJSDocAugmentsTag } from 'typescript'
 import useOrderCloud from '../lib/use-ordercloud'
-import { getUser, logout } from '../redux/slices/ordercloud'
+import { logout } from '../redux/slices/ordercloud'
 import NavLink from './nav-link'
 
 export const siteTitle = 'Next.js OrderCloud Authentication '
 
 export default function Layout({ children, home }) {
-  const {isAnonymous, isAuthenticated, user} = useOrderCloud();
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    console.log('user')
-    if (isAnonymous && !isAuthenticated) {
-      dispatch(logout())
-    } else if (!isAnonymous && !user) {
-      dispatch(getUser())
-    }
-  }, [isAnonymous, user])
+  const {isAnonymous, user} = useOrderCloud();
   
   return (
     <div>

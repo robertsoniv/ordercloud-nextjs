@@ -5,22 +5,40 @@ import {
   Me,
   MeUser,
   Tokens,
-  UserGroups,
 } from "ordercloud-javascript-sdk";
 
-let scope = [];
-let clientId = "";
+/**
+ * ORDERCLOUD CLIENT ID
+ * Use this environment variable to control what scope should be requested when
+ * authenticating with OrderCloud (both anonymous and registered user)
+ */
 
-if (process.env.NEXT_PUBLIC_OC_BASE_API_URL) {
-  Configuration.Set({ baseApiUrl: process.env.NEXT_PUBLIC_OC_BASE_API_URL });
+let clientId = "";
+if (process.env.NEXT_PUBLIC_OC_CLIENT_ID) {
+  clientId = process.env.NEXT_PUBLIC_OC_CLIENT_ID;
 }
 
+/**
+ * ORDERCLOUD SCOPE
+ * Use this environment variable to control what scope should be requested when
+ * authenticating with OrderCloud (both anonymous and registered user). It should be
+ * a comma delimited string
+ */
+
+let scope = [];
 if (process.env.NEXT_PUBLIC_OC_SCOPE) {
   scope = process.env.NEXT_PUBLIC_OC_SCOPE.split(",");
 }
 
-if (process.env.NEXT_PUBLIC_OC_CLIENT_ID) {
-  clientId = process.env.NEXT_PUBLIC_OC_CLIENT_ID;
+/**
+ * ORDERCLOUD BASE URL OVERRIDE
+ * Use this to override the base OrderCloud API url to be used in the javascript SDK.
+ * Make sure the environment base url for the organization you are using matches the
+ * base URL provided in your environment variables. If you want to use production, you
+ * can leave this field out.
+ */
+if (process.env.NEXT_PUBLIC_OC_BASE_API_URL) {
+  Configuration.Set({ baseApiUrl: process.env.NEXT_PUBLIC_OC_BASE_API_URL });
 }
 
 function parseJwt(token?: string) {
@@ -47,7 +65,6 @@ interface LoginAction {
 export const login = createAsyncThunk(
   "ordercloud/login",
   async (credentials: LoginAction, thunkAPI) => {
-    console.log("login", credentials);
     const response = await Auth.Login(
       credentials.username,
       credentials.password,
@@ -77,27 +94,31 @@ export const logout = createAsyncThunk("ordercloud/logout", async () => {
     Tokens.RemoveRefreshToken();
     return {
       access_token: undefined,
+      user: null,
     };
   }
 });
 
-export const getUser = createAsyncThunk("ordercloud/getuser", async () => {
-  const response = await Me.Get();
-  return response;
-});
+export const getUser = createAsyncThunk(
+  "ordercloud/getuser",
+  async (_, thunkAPI) => {
+    const response = await Me.Get();
+    return response;
+  }
+);
 
 interface OrderCloudState {
   isAuthenticated: boolean;
   isAnonymous: boolean;
   user?: MeUser | null;
+  loginError?: string | null;
 }
 
 const initialAccessToken = Tokens.GetAccessToken();
 let isAnonymous = true;
+
 if (initialAccessToken) {
-  console.log("initial hit");
   const parsed = parseJwt(initialAccessToken);
-  console.log("initial parsed hit", parsed);
   isAnonymous = !!parsed.orderid;
 }
 
@@ -111,20 +132,23 @@ export const orderCloudSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      state.loginError = null;
+    });
     builder.addCase(login.fulfilled, (state, action) => {
-      console.log("login fulfilled");
       state.isAnonymous = false;
       state.isAuthenticated = true;
       state.user = action.payload.user;
     });
+    builder.addCase(login.rejected, (state, action) => {
+      state.loginError = action.error.message;
+    });
     builder.addCase(logout.fulfilled, (state, action) => {
-      console.log("logout fulfilled");
       state.isAnonymous = true;
       state.isAuthenticated = !!action.payload.access_token;
-      state.user = null;
+      state.user = action.payload.user;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      console.log("retrieved user");
       state.user = action.payload;
     });
   },

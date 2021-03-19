@@ -16,7 +16,6 @@ export default function ProductDetail() {
     const retrieveProduct = useCallback(async () => {
         if (!query.productid) return;
         try {
-            console.log(query.productid)
             const response = await Me.GetProduct(query.productid)
             setData(response);
         } catch (ex) {
@@ -26,7 +25,6 @@ export default function ProductDetail() {
     }, [query.productid])
 
     useEffect(() => {
-        console.log('p is auth', isAnonymous)
         if (isAuthenticated) {
             retrieveProduct()
         }

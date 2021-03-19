@@ -7,12 +7,10 @@ import { login } from "../redux/slices/ordercloud";
 
 export default function LoginForm() {
     const dispatch = useDispatch()
-    const {isAnonymous} = useOrderCloud()
+    const {isAnonymous, loginError} = useOrderCloud()
     const router = useRouter();
-    const [message, setMessage] = useState()
 
     const loginUser = async event => {
-        console.log('hit')
         event.preventDefault()
         dispatch(login({
             username: event.target.username.value, 
@@ -33,8 +31,8 @@ export default function LoginForm() {
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
                     Sign in to your account
                 </h2>
-                <p className={`block px-4 pt-3 pb-4 bg-yellow-500 border-yellow-700 rounded transform ${message ? 'scale-100' : 'scale-0'} transition-transform duration-300`}>
-                    {message}
+                <p className={`block px-4 pt-3 pb-4 bg-yellow-500 border-yellow-700 rounded transform ${loginError ? 'scale-100' : 'scale-0'} transition-transform duration-300`}>
+                    {loginError}
                 </p>
                 <form className="mt-8 space-y-6" onSubmit={loginUser}>
                     <input type="hidden" name="remember" value="true"/>
