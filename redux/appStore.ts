@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import orderCloud from "./slices/ordercloud";
+import ocCatalog from "./slices/ocCatalog";
+import ocAuth from "./slices/ocAuth";
 
 const store = configureStore({
   reducer: {
-    orderCloud: orderCloud,
+    ocCatalog,
+    ocAuth,
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type OcRootState = ReturnType<typeof store.getState>;
 
 export default store;

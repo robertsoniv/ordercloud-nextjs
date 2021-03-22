@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import { useDispatch } from 'react-redux'
-import useOrderCloud from '../lib/use-ordercloud'
-import { logout } from '../redux/slices/ordercloud'
+import useOcAuth from '../lib/useOcAuth'
+import useOcProductDetail from '../lib/useOcProductDetail'
+import { logout } from '../redux/slices/ocAuth'
 import NavLink from './nav-link'
 
 export const siteTitle = 'Next.js OrderCloud Authentication '
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
   const dispatch = useDispatch()
-  const {isAnonymous, user} = useOrderCloud();
+  const {isAnonymous, user} = useOcAuth();
   
   return (
     <div>

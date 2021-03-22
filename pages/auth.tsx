@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useOrderCloud from "../lib/use-ordercloud";
-import { login, logout } from "../redux/slices/ordercloud";
+import useOcAuth from "../lib/useOcAuth";
+import { login, logout } from "../redux/slices/ocAuth";
 
 export default function Auth() {
-  const {isAnonymous} = useOrderCloud()
+  const {isAnonymous} = useOcAuth()
   const dispatch = useDispatch();
 
   return (

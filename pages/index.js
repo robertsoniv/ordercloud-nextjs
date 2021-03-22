@@ -1,16 +1,19 @@
 import Head from 'next/head'
 import { useMemo } from 'react'
 import { siteTitle } from '../components/layout'
-import useOrderCloud from '../lib/use-ordercloud'
+import useOcAuth from '../lib/useOcAuth'
+import useOcProductDetail from '../lib/useOcProductDetail';
 
 export default function Home({ allPostsData }) {
-  const oc = useOrderCloud();
+  const oc = useOcAuth();
+  
+  const test = useOcProductDetail('jacket')
 
   const jsonContent = useMemo(() => {
-    let content = JSON.stringify(oc, null, 2);
+    let content = JSON.stringify(test, null, 2);
     console.log(content);
     return content
-  }, [oc])
+  }, [test])
 
   return (
     <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">

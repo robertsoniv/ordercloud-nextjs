@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser, logout } from '../redux/slices/ordercloud'
+import { OcRootState } from "../redux/appStore";
+import { getUser, logout } from '../redux/slices/ocAuth'
 
 let hasRetrievedUser = false;
 
-const useOrderCloud = () => {
+const useOcAuth = () => {
     const dispatch = useDispatch()
-    const {isAnonymous, isAuthenticated, user, loginError} = useSelector((state) => state.orderCloud);
+    const {isAnonymous, isAuthenticated, user, loginError} = useSelector((state:OcRootState) => state.ocAuth);
 
     useEffect(() => {
         if (isAnonymous && !isAuthenticated) {
@@ -30,4 +31,4 @@ const useOrderCloud = () => {
 
 }
 
-export default useOrderCloud
+export default useOcAuth

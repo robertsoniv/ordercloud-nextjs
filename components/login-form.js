@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import useOrderCloud from "../lib/use-ordercloud";
-import { login } from "../redux/slices/ordercloud";
+import useOcAuth from "../lib/useOcAuth";
+import { login } from "../redux/slices/ocAuth";
 
 export default function LoginForm() {
     const dispatch = useDispatch()
-    const {isAnonymous, loginError} = useOrderCloud()
+    const {isAnonymous, loginError} = useOcAuth()
     const router = useRouter();
 
     const loginUser = async event => {
