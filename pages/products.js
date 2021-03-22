@@ -14,6 +14,6 @@ export default function Products() {
     })
 
     return isReady && (
-        <OcProductList page={page} pageSize={pageSize} columns={3}/>
+        <OcProductList page={page} pageSize={pageSize} />
     )
 }

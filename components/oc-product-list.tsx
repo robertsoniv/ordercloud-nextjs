@@ -2,7 +2,7 @@ import Link from "next/link"
 import useOcProductList from "../lib/useOcProductList"
 import utilStyles from "../styles/utils.module.css"
 
-export default function OcProductList({page, pageSize, columns = 3}) {
+export default function OcProductList({page, pageSize}) {
 
     const {items, meta} = useOcProductList({
         page,
@@ -14,7 +14,7 @@ export default function OcProductList({page, pageSize, columns = 3}) {
             {meta && `Showing ${meta.ItemRange[0]} - ${meta.ItemRange[1]} of ${meta.TotalCount} products`}
             {items ? (
                 <>
-                    <ul className={`grid grid-cols-${columns} gap-2 pt-4`}>
+                    <ul className="grid grid-cols-3 gap-2 pt-4">
                         {items.map((p, i) => (
                             <li className="list-none p-4 bg-white shadow-md hover:shadow-xl hover:scale-105 transform transition-all" key={i}>
                                 <Link href={`/products/${p.ID}`}>
