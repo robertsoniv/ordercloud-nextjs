@@ -1,10 +1,10 @@
 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/button';
+import Container from '@material-ui/core/container';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/toolbar';
+import Typography from '@material-ui/core/typography';
 import Head from 'next/head';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';

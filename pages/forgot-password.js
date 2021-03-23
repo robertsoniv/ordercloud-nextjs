@@ -1,6 +1,6 @@
-import Box from "@material-ui/core/Box";
-import Divider from "@material-ui/core/Divider";
-import Container  from "@material-ui/core/Container";
+import Box from "@material-ui/core/box";
+import Divider from "@material-ui/core/divider";
+import Container  from "@material-ui/core/container";
 import Typography from "@material-ui/core/typography";
 import Link from "../components/link";
 

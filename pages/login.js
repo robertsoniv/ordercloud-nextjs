@@ -1,4 +1,4 @@
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/box";
 import LoginForm from "../components/login-form";
 
 export default function Login() {

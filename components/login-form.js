@@ -1,9 +1,9 @@
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/box";
+import Button from "@material-ui/core/button";
+import Checkbox from '@material-ui/core/checkbox';
+import FormControlLabel from '@material-ui/core/formControlLabel';
+import TextField from "@material-ui/core/textField";
+import Typography from "@material-ui/core/typography";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
