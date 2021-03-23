@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, Dictionary } from "@reduxjs/toolkit";
-import { keyBy } from "lodash";
+import { initial, keyBy } from "lodash";
 import {
   BuyerProduct,
   Category,
@@ -61,7 +61,7 @@ interface OcCatalogState {
   };
 }
 
-const initialState: OcCatalogState = {
+export const initialState: OcCatalogState = {
   products: {
     cache: {},
   },
@@ -69,6 +69,8 @@ const initialState: OcCatalogState = {
     cache: {},
   },
 };
+
+export type OcCatalogProductsState = typeof initialState.products;
 
 const ocCatalogSlice = createSlice({
   name: "ocCatalog",

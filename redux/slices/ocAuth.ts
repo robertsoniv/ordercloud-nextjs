@@ -9,6 +9,8 @@ import {
 import { withOcErrorHandler } from "../withOcErrorHandler";
 import { cleanCatalogCache } from "./ocCatalog";
 
+//TODO: Consider a way to not rely on Next.js specific environment variables
+
 /**
  * ORDERCLOUD CLIENT ID
  * Use this environment variable to control what scope should be requested when
@@ -18,6 +20,7 @@ import { cleanCatalogCache } from "./ocCatalog";
 let clientId = "";
 if (process.env.NEXT_PUBLIC_OC_CLIENT_ID) {
   clientId = process.env.NEXT_PUBLIC_OC_CLIENT_ID;
+  Configuration.Set({ clientID: clientId });
 }
 
 /**
@@ -43,6 +46,11 @@ if (process.env.NEXT_PUBLIC_OC_BASE_API_URL) {
   Configuration.Set({ baseApiUrl: process.env.NEXT_PUBLIC_OC_BASE_API_URL });
 }
 
+/**
+ * ORDERCLOUD ALLOW ANONYMOUS
+ */
+const allowAnonymous = Boolean(process.env.NEXT_PUBLIC_OC_ALLOW_ANONYMOUS);
+
 function parseJwt(token?: string) {
   if (!token) return {};
   var base64Url = token.split(".")[1];
@@ -67,8 +75,6 @@ interface LoginAction {
 export const login = createAsyncThunk(
   "ocAuth/login",
   withOcErrorHandler(async (credentials: LoginAction, thunkAPI) => {
-    const cs = thunkAPI.getState();
-    console.log(cs, thunkAPI);
     const response = await Auth.Login(
       credentials.username,
       credentials.password,
@@ -88,8 +94,6 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
   "ocAuth/logout",
   withOcErrorHandler<any>(async (_, thunkAPI) => {
-    const allowAnonymous = Boolean(process.env.NEXT_PUBLIC_OC_ALLOW_ANONYMOUS);
-    console.log("hit", allowAnonymous);
     thunkAPI.dispatch(cleanCatalogCache());
     if (allowAnonymous) {
       const response = await Auth.Anonymous(clientId, scope);

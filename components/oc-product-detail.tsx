@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme:Theme) => createStyles({
         margin: theme.spacing(2, 0),
     },
     price: {
+        marginLeft: theme.spacing(3),
         color: green[500],
         fontWeight: 'bold'
     },

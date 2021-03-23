@@ -5,17 +5,30 @@ import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography'
 import Skeleton from "@material-ui/lab/Skeleton"
+import { Filters } from 'ordercloud-javascript-sdk'
+import { FunctionComponent, useMemo } from 'react'
 import useOcProductList from "../lib/useOcProductList"
 import CardActionAreaLink from './cardActionAreaLink'
 
-const placeholderArray = [1,1,1,1,1,1];
+interface OcProductListProps {
+    catalogId?: string;
+    categoryId?: string;
+    search?: string;
+    page?: number;
+    pageSize: number;
+    searchOn?: string | string[];
+    sortBy?: string | string[];
+    filters?: Filters
+}
 
-export default function OcProductList({page, pageSize}) {
+const OcProductList:FunctionComponent<OcProductListProps> = ({
+    pageSize = 20,
+    ...rest
+}) => {
 
-    const {items, meta} = useOcProductList({
-        page,
-        pageSize
-    })
+    const placeholderArray = useMemo(() => new Array(pageSize).fill(1), [pageSize]);
+
+    const { items } = useOcProductList({pageSize, ...rest})
     
     return (
         <Box marginY={4}>
@@ -44,3 +57,5 @@ export default function OcProductList({page, pageSize}) {
         </Box>
     )
 }
+
+export default OcProductList;
