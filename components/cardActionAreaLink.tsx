@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import MuiCardActionArea, { CardActionAreaProps, CardActionAreaTypeMap } from '@material-ui/core/cardactionarea';
+import MuiCardActionArea from '@material-ui/core/CardActionArea';
 
 interface NextComposedProps {
   as: any
