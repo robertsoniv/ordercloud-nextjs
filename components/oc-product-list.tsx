@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography'
-import Skeleton from "@material-ui/lab/skeleton"
+import Skeleton from "@material-ui/lab/Skeleton"
 import useOcProductList from "../lib/useOcProductList"
 import CardActionAreaLink from './cardActionAreaLink'
 

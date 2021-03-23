@@ -6,7 +6,7 @@ import useOcProductDetail from "../lib/useOcProductDetail"
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { green } from "@material-ui/core/colors"
 import Divider from "@material-ui/core/Divider"
-import Skeleton from "@material-ui/lab/skeleton"
+import Skeleton from "@material-ui/lab/Skeleton"
 
 const useStyles = makeStyles((theme:Theme) => createStyles({
     name: {
