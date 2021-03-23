@@ -6,6 +6,7 @@ import useOcProductDetail from "../lib/useOcProductDetail"
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { green } from "@material-ui/core/colors"
 import Divider from "@material-ui/core/Divider"
+import Skeleton from "@material-ui/lab/Skeleton"
 
 const useStyles = makeStyles((theme:Theme) => createStyles({
     name: {
@@ -50,7 +51,14 @@ export default function OcProductDetail({productId}) {
                         <Typography variant="h4" component="p" className={classes.price}>{price}</Typography>
                     </Box>
                     ) : (
-                        <h1>Product Data Loading...</h1>
+                    <Box display="flex" alignItems="center">
+                        <div className={classes.grow}>
+                            <Skeleton variant="text" animation="pulse" height={32} width={400}/>
+                            <Divider className={classes.divider}/>
+                            <Skeleton variant="text" animation="pulse" height={48} width={600}/>
+                        </div>
+                        <Skeleton variant="text" animation="pulse" height={41} width={200}/>
+                    </Box>
                 )}
             </Box>
         </Container>
