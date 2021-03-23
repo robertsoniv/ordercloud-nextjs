@@ -1,14 +1,18 @@
-import '../styles/global.css'
-import '../styles/prism.css'
 import Layout from '../components/layout'
 import OrderCloudProvider from '../redux/ordercloud.provider';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../lib/theme';
 
 export default function App({ Component, pageProps }) {
     return (
         <OrderCloudProvider>
-            <Layout>
-                <Component {...pageProps}/>
-            </Layout>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Layout>
+                    <Component {...pageProps}/>
+                </Layout>
+            </ThemeProvider>
         </OrderCloudProvider>
     )
 }

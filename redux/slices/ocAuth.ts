@@ -89,6 +89,7 @@ export const logout = createAsyncThunk(
   "ocAuth/logout",
   withOcErrorHandler<any>(async (_, thunkAPI) => {
     const allowAnonymous = Boolean(process.env.NEXT_PUBLIC_OC_ALLOW_ANONYMOUS);
+    console.log("hit", allowAnonymous);
     thunkAPI.dispatch(cleanCatalogCache());
     if (allowAnonymous) {
       const response = await Auth.Anonymous(clientId, scope);

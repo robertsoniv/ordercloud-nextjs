@@ -1,6 +1,13 @@
-import Link from "next/link"
+import Box from '@material-ui/core/Box'
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardContent from '@material-ui/core/CardContent'
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import GridListTile from "@material-ui/core/GridListTile"
+import Typography from '@material-ui/core/Typography'
 import useOcProductList from "../lib/useOcProductList"
-import utilStyles from "../styles/utils.module.css"
+import CardActionAreaLink from './cardActionAreaLink'
 
 export default function OcProductList({page, pageSize}) {
 
@@ -10,25 +17,29 @@ export default function OcProductList({page, pageSize}) {
     })
     
     return (
-        <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 pt-12">
-            {meta && `Showing ${meta.ItemRange[0]} - ${meta.ItemRange[1]} of ${meta.TotalCount} products`}
-            {items ? (
-                <>
-                    <ul className="grid grid-cols-3 gap-2 pt-4">
+        <Box marginY={4}>
+            <Container maxWidth="md">
+                {items ? (
+                    <Grid container spacing={2}>
                         {items.map((p, i) => (
-                            <li className="list-none p-4 bg-white shadow-md hover:shadow-xl hover:scale-105 transform transition-all" key={i}>
-                                <Link href={`/products/${p.ID}`}>
-                                    <a className="block mb-3 text-red-500 hover:text-red-700 h-12">{p.Name}</a>
-                                </Link>
-                                <br/>
-                                <small className={utilStyles.lightText} dangerouslySetInnerHTML={{ __html: p.Description}}/>
-                            </li>
+                            <Grid item key={i} xs={12} sm={6} md={4}>
+                                <Card style={{height:'100%'}}>
+                                    <CardActionAreaLink href={`/products/${p.ID}`}>
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h6" component="h2">
+                                                {p.Name}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary" component="p"  dangerouslySetInnerHTML={{ __html: p.Description}}/>
+                                        </CardContent>
+                                    </CardActionAreaLink>
+                                </Card>
+                            </Grid>
                         ))}
-                    </ul>
-                </>
-            ) : (
-                <h1>Loading Products</h1>
-            )}
-        </div>
+                    </Grid>
+                ) : (
+                    <h1>Loading Products</h1>
+                )}
+            </Container>
+        </Box>
     )
 }
