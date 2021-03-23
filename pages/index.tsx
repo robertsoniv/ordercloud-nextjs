@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import useOcAuth from '../lib/useOcAuth';
-import Typography from "@material-ui/core/typography"
-import Container from "@material-ui/core/container"
-import Box from "@material-ui/core/box"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import Box from "@material-ui/core/Box"
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme:Theme) => createStyles({
