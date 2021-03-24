@@ -13,10 +13,10 @@ import { withOcErrorHandler } from "../withOcErrorHandler";
 
 export const setListOptions = createAsyncThunk(
   "ocCatalog/setListOptions",
-  withOcErrorHandler<any, any>(async (listOptions: any, thunkAPI) => {
+  (listOptions: any, thunkAPI) => {
     thunkAPI.dispatch(listProducts(listOptions));
     return Promise.resolve(listOptions);
-  })
+  }
 );
 
 export const listProducts = createAsyncThunk(
@@ -84,7 +84,7 @@ const ocCatalogSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(listProducts.pending, (state) => {
       state.products.items = undefined;
-      state.products.meta = undefined;
+      // state.products.meta = undefined;
     });
     builder.addCase(listProducts.fulfilled, (state, action) => {
       state.products.items = action.payload.Items;
@@ -93,6 +93,9 @@ const ocCatalogSlice = createSlice({
         ...keyBy(action.payload.Items, "ID"),
       };
       state.products.meta = action.payload.Meta;
+    });
+    builder.addCase(setListOptions.pending, (state, action) => {
+      state.products.listOptions = action.meta.arg;
     });
     builder.addCase(setListOptions.fulfilled, (state, action) => {
       state.products.listOptions = action.payload;
