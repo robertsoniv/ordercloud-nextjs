@@ -65,7 +65,7 @@ export default function Layout({ children }) {
               </Typography>
               <div className={classes.spacer}></div>
               <ButtonLink color="inherit" href="/">Home</ButtonLink>
-              <ButtonLink color="inherit" href="/products">Products</ButtonLink>
+              <ButtonLink color="inherit" href="/products?ps=2">Products</ButtonLink>
               <div className={classes.grow}></div>
               {isAnonymous ? (
                 <ButtonLink color="inherit" href="/login">Login</ButtonLink>

@@ -57,13 +57,17 @@ interface OcCatalogState {
     cache: Dictionary<BuyerProduct>;
     meta?: MetaWithFacets;
     items?: BuyerProduct[];
-    current?: BuyerProduct;
+    current: {
+      product?: BuyerProduct;
+      error?: boolean;
+    };
   };
 }
 
 export const initialState: OcCatalogState = {
   products: {
     cache: {},
+    current: {},
   },
   categories: {
     cache: {},
@@ -71,6 +75,7 @@ export const initialState: OcCatalogState = {
 };
 
 export type OcCatalogProductsState = typeof initialState.products;
+export type OcCatalogProductDetailState = typeof initialState.products.current;
 
 const ocCatalogSlice = createSlice({
   name: "ocCatalog",
@@ -101,11 +106,14 @@ const ocCatalogSlice = createSlice({
       state.products.listOptions = action.payload;
     });
     builder.addCase(setProduct.pending, (state) => {
-      state.products.current = undefined;
+      state.products.current = {};
     });
     builder.addCase(setProduct.fulfilled, (state, action) => {
-      state.products.current = action.payload;
+      state.products.current.product = action.payload;
       state.products.cache[action.payload.ID] = action.payload;
+    });
+    builder.addCase(setProduct.rejected, (state) => {
+      state.products.current.error = true;
     });
   },
 });
