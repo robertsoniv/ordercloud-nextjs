@@ -3,12 +3,11 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography'
-import Pagination from '@material-ui/lab/Pagination'
 import Skeleton from "@material-ui/lab/Skeleton"
 import { Filters } from 'ordercloud-javascript-sdk'
 import { FunctionComponent, useMemo } from 'react'
 import useOcProductList from "../lib/useOcProductList"
-import CardActionAreaLink from './cardActionAreaLink'
+import CardActionAreaLink from './CardActionAreaLink'
 
 interface OcProductListProps {
     catalogId?: string;

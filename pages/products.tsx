@@ -1,32 +1,11 @@
-import { useRouter } from "next/router"
-import { ChangeEvent, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import OcProductList from "../components/oc-product-list"
-import OcProductPagination from "../components/oc-product-pagination"
-import Box from '@material-ui/core/Box'
-import Container from "@material-ui/core/Container"
-import TextField, { TextFieldProps } from "@material-ui/core/TextField"
-import useDebounce from "../lib/useDebounce"
+import Box from '@material-ui/core/Box';
+import Container from "@material-ui/core/Container";
+import { useRouter } from "next/router";
 import { stringifyUrl } from "query-string";
-
-const DebouncedTextField = forwardRef<any, TextFieldProps>((props, ref) => {
-    const {onChange, value, ...rest} = props;
-
-    const [localValue, setLocalValue] = useState(value);
-
-    const debouncedValue:string = useDebounce(localValue, 350);
-
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setLocalValue(e.target.value);
-    }
-
-    useEffect(() => {
-        if (debouncedValue !== value) {
-            onChange({target: {value: debouncedValue}} as ChangeEvent<HTMLInputElement>)
-        }
-    }, [debouncedValue, value])
-
-    return <TextField ref={ref} value={localValue} onChange={handleChange} {...rest}/>
-})
+import { ChangeEvent, useCallback, useMemo } from "react";
+import DebouncedTextField from "../components/DebouncedTextField";
+import OcProductList from "../components/OcProductList";
+import OcProductPagination from "../components/OcProductPagination";
 
 export default function Products() {
     const {isReady, query, pathname, replace, asPath} = useRouter();

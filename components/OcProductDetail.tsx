@@ -1,12 +1,12 @@
 import Box from "@material-ui/core/Box"
+import { green } from "@material-ui/core/colors"
 import Container from "@material-ui/core/Container"
+import Divider from "@material-ui/core/Divider"
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from "@material-ui/core/Typography"
+import Skeleton from "@material-ui/lab/Skeleton"
 import { useMemo } from "react"
 import useOcProductDetail from "../lib/useOcProductDetail"
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { green } from "@material-ui/core/colors"
-import Divider from "@material-ui/core/Divider"
-import Skeleton from "@material-ui/lab/Skeleton"
 
 const useStyles = makeStyles((theme:Theme) => createStyles({
     name: {

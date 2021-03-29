@@ -1,7 +1,6 @@
 import Pagination from "@material-ui/lab/Pagination";
-import { Meta, MetaWithFacets } from "ordercloud-javascript-sdk";
 import React, { FunctionComponent, useCallback } from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { OcRootState } from "../redux/appStore";
 
 interface OcPaginationProps {
