@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useOcAuth from "../lib/useOcAuth";
 import { login } from "../redux/slices/ocAuth";
-import Link from "./link";
+import Link from "./Link";
 
 export default function LoginForm() {
     const dispatch = useDispatch()

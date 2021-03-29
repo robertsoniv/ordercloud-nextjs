@@ -10,7 +10,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import useOcAuth from '../lib/useOcAuth';
 import { logout } from '../redux/slices/ocAuth';
-import ButtonLink from './buttonLink';
+import ButtonLink from './ButtonLink';
 
 export const siteTitle = 'Next.js OrderCloud Authentication'
 
