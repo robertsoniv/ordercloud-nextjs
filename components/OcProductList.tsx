@@ -7,7 +7,7 @@ import Skeleton from "@material-ui/lab/Skeleton"
 import { Filters } from 'ordercloud-javascript-sdk'
 import { FunctionComponent, useMemo } from 'react'
 import useOcProductList from "../lib/useOcProductList"
-import CardActionAreaLink from './Card-ActionAreaLink'
+import CardActionAreaLink from './CardActionAreaLink'
 
 interface OcProductListProps {
     catalogId?: string;
