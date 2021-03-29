@@ -1,19 +1,6 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import Layout from "../components/layout";
-import LoginForm from "../components/login-form";
-import { useOrderCloud } from "../lib/ordercloud-provider";
-
+import Box from "@material-ui/core/Box";
+import LoginForm from "../components/LoginForm";
 
 export default function Login() {
-    const {isAnonymous} = useOrderCloud()
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!isAnonymous) {
-            router.push('/')
-        }
-    }, [isAnonymous])
-
-    return <LoginForm/>
+    return <Box width={400} maxWidth="100%" margin="5em auto"><LoginForm/></Box>
 }

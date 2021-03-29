@@ -1,19 +1,18 @@
-import '../styles/global.css'
-import '../styles/prism.css'
-import OrderCloudProvider from '../lib/ordercloud-provider'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
+import OrderCloudProvider from '../redux/ordercloud.provider';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../lib/theme';
 
 export default function App({ Component, pageProps }) {
     return (
-        <OrderCloudProvider
-            baseApiUrl={process.env.NEXT_PUBLIC_OC_BASE_API_URL}
-            clientId={process.env.NEXT_PUBLIC_OC_CLIENT_ID}
-            scope={process.env.NEXT_PUBLIC_OC_SCOPE}
-            allowAnonymous
-        >
-            <Layout>
-                <Component {...pageProps}/>
-            </Layout>
+        <OrderCloudProvider>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Layout>
+                    <Component {...pageProps}/>
+                </Layout>
+            </ThemeProvider>
         </OrderCloudProvider>
     )
 }
